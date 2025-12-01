@@ -7,13 +7,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:async';  
 
 import 'core/app_export.dart';
-import 'theme/app_theme.dart';
-import 'routes/app_routes.dart';
 import 'presentation/wardrobe_setup/wardrobe_setup.dart';
 import 'presentation/home_dashboard/home_dashboard.dart';
 import 'presentation/wardrobe_gallery/wardrobe_gallery.dart';
 import 'presentation/profile/profile_screen.dart';
-import 'widgets/custom_bottom_bar.dart';
 import 'widgets/custom_app_bar.dart';
 
 // Global navigator key for route navigation
@@ -38,7 +35,14 @@ Future<void> main() async {
   ));
 
   // Initialize cameras for wardrobe capture
-  final cameras = await availableCameras();
+  // Wrap in try-catch to handle platforms without camera support
+  List<CameraDescription> cameras = [];
+  try {
+    cameras = await availableCameras();
+  } catch (e) {
+    debugPrint('Camera initialization failed (this is normal on some platforms): $e');
+    // Continue with empty camera list - app will still work
+  }
 
   // Run app with error handling
   runZonedGuarded(() {
@@ -71,15 +75,13 @@ class StyleCastApp extends StatelessWidget {
           themeMode: ThemeMode.light, // Change to system later if desired
 
           // Pass cameras to wardrobe setup
-          initialRoute: AppRoutes.onboarding,
+          initialRoute: AppRoutes.homeDashboard,
           navigatorKey: navigatorKey,
 
           routes: {
-        
             AppRoutes.wardrobeSetup: (context) =>  WardrobeSetup(),
             AppRoutes.homeDashboard: (context) =>  MainScreen(initialIndex: 0),
-            '/wardrobe-gallery': (context) =>  MainScreen(initialIndex: 1),
-          
+            AppRoutes.wardrobeGallery: (context) =>  MainScreen(initialIndex: 1),
             AppRoutes.profile: (context) =>  MainScreen(initialIndex: 3),
           },
 

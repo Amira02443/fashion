@@ -44,7 +44,8 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 12.w,
-                    backgroundColor: theme.colorScheme.tertiary.withOpacity(0.2),
+                    backgroundColor:
+                        theme.colorScheme.tertiary.withOpacity(0.2),
                     child: CustomIconWidget(
                       iconName: 'person',
                       size: 48,
@@ -57,7 +58,7 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Alex Rivera',
+                          'Amira Krid',
                           style: theme.textTheme.headlineSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -99,7 +100,8 @@ class ProfileScreen extends StatelessWidget {
               icon: 'favorite',
               title: 'Favorite Outfits',
               subtitle: 'Your saved recommendations',
-              onTap: () => Fluttertoast.showToast(msg: "Favorites coming soon!"),
+              onTap: () =>
+                  Fluttertoast.showToast(msg: "Favorites coming soon!"),
             ),
             _buildMenuTile(
               context,
@@ -129,7 +131,8 @@ class ProfileScreen extends StatelessWidget {
               context,
               icon: 'help_outline',
               title: 'Help & Feedback',
-              onTap: () => Fluttertoast.showToast(msg: "Send us your thoughts!"),
+              onTap: () =>
+                  Fluttertoast.showToast(msg: "Send us your thoughts!"),
             ),
             _buildMenuTile(
               context,
@@ -149,17 +152,23 @@ class ProfileScreen extends StatelessWidget {
                     context: context,
                     builder: (_) => AlertDialog(
                       title: const Text('Log Out?'),
-                      content: const Text('You’ll need to sign in again next time.'),
+                      content:
+                          const Text('You’ll need to sign in again next time.'),
                       actions: [
-                        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+                        TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Cancel')),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red),
                           onPressed: () {
                             // Replace with real logout later
                             Fluttertoast.showToast(msg: "Logged out!");
-                            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, '/', (route) => false);
                           },
-                          child: const Text('Log Out', style: TextStyle(color: Colors.white)),
+                          child: const Text('Log Out',
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ],
                     ),
@@ -224,13 +233,15 @@ Widget _buildMenuTile(
         color: theme.colorScheme.tertiary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: CustomIconWidget(iconName: icon, color: theme.colorScheme.tertiary, size: 24),
+      child: CustomIconWidget(
+          iconName: icon, color: theme.colorScheme.tertiary, size: 24),
     ),
     title: Text(title, style: theme.textTheme.titleMedium),
     subtitle: subtitle != null
-        ? Text(subtitle, style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withOpacity(0.7),
-          ))
+        ? Text(subtitle,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withOpacity(0.7),
+            ))
         : null,
     trailing: trailing ??
         CustomIconWidget(
